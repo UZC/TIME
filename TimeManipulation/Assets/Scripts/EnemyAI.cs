@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 
     void AttackCharacter()
     {
-      
+
     }
 
     void Patroling()
