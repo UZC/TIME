@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
    
     public Transform player;
-    public Transform moveSpot;
+    private Vector2 moveSpot;
 
     public float attackDistance = 2f;
     public float detectRadius;
@@ -16,18 +16,19 @@ public class EnemyAI : MonoBehaviour
     public float startWaitTime;
     
     public float maxX;
-    public float minX;
     public float maxY;
-    public float minY;
 
     private float waitTIme;
     private Rigidbody2D rb;
     private Vector2 movement;
+    Vector2 startPos;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         waitTIme = startWaitTime;
-        moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        startPos = new Vector2(this.transform.position.x, this.transform.position.y);
+        moveSpot = new Vector2(Random.Range(startPos.x - maxX, startPos.x + maxX), 
+            Random.Range(startPos.y - maxY, startPos.y + maxY));
     }
    
     private void FixedUpdate()
@@ -51,8 +52,8 @@ public class EnemyAI : MonoBehaviour
     void RotateToPlayer()
     {
         Vector2 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.rotation = angle;
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //rb.rotation = angle;
         direction.Normalize();
         movement = direction;
 
@@ -70,13 +71,14 @@ public class EnemyAI : MonoBehaviour
 
     void Patroling()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpot.position, patrolSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, moveSpot, patrolSpeed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, moveSpot.position) < 0.2f)
+        if (Vector2.Distance(transform.position, moveSpot) < 0.2f)
         {
             if (waitTIme <= 0)
             {
-                moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+                moveSpot = new Vector2(Random.Range(startPos.x - maxX, startPos.x + maxX),
+    Random.Range(startPos.y - maxY, startPos.y + maxY));
                 waitTIme = startWaitTime;
             }
             else

@@ -9,7 +9,7 @@ public class MeleeAttack : MonoBehaviour
     public Health player;
     public int damage;
 
-
+    float speedTemp;
     private bool onCooldown;
     void Start()
     {
@@ -27,6 +27,8 @@ public class MeleeAttack : MonoBehaviour
     {
         if (!onCooldown && !player.IsDead())
         {
+            speedTemp = this.GetComponent<EnemyAI>().moveSpeed;
+            this.GetComponent<EnemyAI>().moveSpeed = 0;
             player.TakeDamage(damage);
             onCooldown = true;
             StartCoroutine(StartCoolDown());
@@ -37,5 +39,6 @@ public class MeleeAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown);
         onCooldown = false;
+        this.GetComponent<EnemyAI>().moveSpeed = speedTemp;
     }
 }
