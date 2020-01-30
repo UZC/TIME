@@ -69,8 +69,13 @@
     <Compile Include="Assets\Scripts\HideTilemapColliderOnPlay.cs" />
     <Compile Include="Assets\Scripts\IsometricCharacterRenderer.cs" />
     <Compile Include="Assets\Scripts\IsometricPlayerMovementController.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\Artiffact.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\Dash.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\EnemyAnimation.cs" />
     <Compile Include="Assets\Scripts\vdmytrenko\Health.cs" />
     <Compile Include="Assets\Scripts\vdmytrenko\MeleeAttack.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\SceneModel.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\VictoryCondition.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Vlad/Documents/GitHub/TIME/TimeManipulation/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

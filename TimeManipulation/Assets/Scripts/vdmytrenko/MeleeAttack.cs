@@ -8,12 +8,18 @@ public class MeleeAttack : MonoBehaviour
     public float attackCooldown;
     public Health player;
     public int damage;
+    public float slowValue = 0.7f;
+    public float slowRange = 1.5f;
+    public float slowCooldown;
 
     float speedTemp;
     private bool onCooldown;
+
+    private bool slowOnCd;
     void Start()
     {
         onCooldown = false;
+        slowOnCd = false;
     }
 
     // Update is called once per frame
@@ -21,8 +27,34 @@ public class MeleeAttack : MonoBehaviour
     {
         if (Vector3.Distance(this.transform.position, player.transform.position) <= attackRange)
             DoAttack();
+        if (Input.GetKeyDown(KeyCode.E) && SceneModel.isArtiffactTaken)
+            AOESlow();
     }
 
+    private void AOESlow()
+    {
+        if (!slowOnCd)
+        {
+            player.GetComponent<Light>().enabled = true;
+            StartCoroutine(Blim());
+            slowOnCd = true;
+            StartCoroutine(SlowCD());
+            if (Vector2.Distance(this.transform.position, player.transform.position) <= slowRange)
+            {
+                this.GetComponent<EnemyAI>().moveSpeed *= slowValue;
+            }
+        }
+    }
+    private IEnumerator Blim()
+    {
+        yield return new WaitForSeconds(0.1f);
+        player.GetComponent<Light>().enabled = false;
+    }
+    private IEnumerator SlowCD()
+    {
+        yield return new WaitForSeconds(slowCooldown);
+        slowOnCd = false;
+    }
     private void DoAttack()
     {
         if (!onCooldown && !player.IsDead())
@@ -31,6 +63,7 @@ public class MeleeAttack : MonoBehaviour
             this.GetComponent<EnemyAI>().moveSpeed = 0;
             player.TakeDamage(damage);
             onCooldown = true;
+            this.GetComponent<EnemyAnimation>().Attack();
             StartCoroutine(StartCoolDown());
         }
     }
