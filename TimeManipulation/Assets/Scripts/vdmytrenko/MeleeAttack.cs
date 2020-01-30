@@ -47,7 +47,7 @@ public class MeleeAttack : MonoBehaviour
     }
     private IEnumerator Blim()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.25f);
         player.GetComponent<Light>().enabled = false;
     }
     private IEnumerator SlowCD()
