@@ -64,10 +64,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimationsController.cs" />
     <Compile Include="Assets\Scripts\BasicCameraFollow.cs" />
+    <Compile Include="Assets\Scripts\DayChanging.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\HideTilemapColliderOnPlay.cs" />
     <Compile Include="Assets\Scripts\IsometricCharacterRenderer.cs" />
     <Compile Include="Assets\Scripts\IsometricPlayerMovementController.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\Health.cs" />
+    <Compile Include="Assets\Scripts\vdmytrenko\MeleeAttack.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Vlad/Documents/GitHub/TIME/TimeManipulation/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
