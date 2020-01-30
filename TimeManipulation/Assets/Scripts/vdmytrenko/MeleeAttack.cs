@@ -15,6 +15,7 @@ public class MeleeAttack : MonoBehaviour
     {
         onCooldown = false;
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
