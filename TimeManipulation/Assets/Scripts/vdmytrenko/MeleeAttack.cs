@@ -61,9 +61,9 @@ public class MeleeAttack : MonoBehaviour
         {
             speedTemp = this.GetComponent<EnemyAI>().moveSpeed;
             this.GetComponent<EnemyAI>().moveSpeed = 0;
-            player.TakeDamage(damage);
-            onCooldown = true;
             this.GetComponent<EnemyAnimation>().Attack();
+            StartCoroutine(BeforeAttack());
+            onCooldown = true;
             StartCoroutine(StartCoolDown());
         }
     }
@@ -73,5 +73,10 @@ public class MeleeAttack : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         onCooldown = false;
         this.GetComponent<EnemyAI>().moveSpeed = speedTemp;
+    }
+    private IEnumerator BeforeAttack()
+    {
+        yield return new WaitForSeconds(0.7f);
+        player.TakeDamage(damage);
     }
 }

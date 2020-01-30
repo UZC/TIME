@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneModel : MonoBehaviour
 {
@@ -10,10 +12,14 @@ public class SceneModel : MonoBehaviour
     [SerializeField]
     public static SpriteRenderer sceneLight;
 
+    public Text text;
+    public Canvas can;
+
     void Start()
     {
         isArtiffactTaken = false;
         sceneLight = GameObject.Find("back").GetComponent<SpriteRenderer>();
+        can.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,11 +44,23 @@ public class SceneModel : MonoBehaviour
 
     public void VictoryScreen()
     {
-            
+        can.enabled = true;
+        text.text = "Congratulation, you won!";
     }
 
     public void DefeatScreen()
     {
-
+        can.enabled = true;
+        text.text = "You died :(";
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("vdmytrenko");
+        Time.timeScale = 1;
+        isArtiffactTaken = false;
+    }
+    public void CloseApp()
+    {
+        Application.Quit();
     }
 }
